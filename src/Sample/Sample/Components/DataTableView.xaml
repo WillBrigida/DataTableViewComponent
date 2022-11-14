@@ -1,0 +1,453 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Sample.Components.DataTableView"
+    ColumnDefinitions="Auto, *"
+    ColumnSpacing="0">
+
+        
+    <!--Coluna Fixa-->
+    <Grid HorizontalOptions="End" RowDefinitions="Auto, *" >
+
+        <!--  Cabeçalho  -->
+        <ScrollView
+            InputTransparent="True"
+            x:Name="CabecalhoFixoScrollView"
+            HorizontalScrollBarVisibility="Never"
+            IsVisible="True"
+            Orientation="Horizontal"
+            VerticalScrollBarVisibility="Never">
+            <HorizontalStackLayout x:Name="CabecalhoFixoHorizontalStackLayout">
+                <!--<BindableLayout.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>ID</x:String>
+                    </x:Array>
+                </BindableLayout.ItemsSource>
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Label
+                                FontAttributes="Bold"
+                                HeightRequest="45"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding .}"
+                                VerticalTextAlignment="Center"
+                                WidthRequest="100" />
+                        </Grid>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>-->
+            </HorizontalStackLayout>
+        </ScrollView>
+
+        <!--  Coluna  -->
+        <ScrollView
+            x:Name="ColunaFixaScrollView"
+            Grid.Row="1"
+            Scrolled="ColunaFixaScrollView_Scrolled"
+            HorizontalOptions="End"
+            HorizontalScrollBarVisibility="Never"
+            VerticalScrollBarVisibility="Never">
+            <HorizontalStackLayout x:Name="ColunaFixaHorizontalStackLayout" VerticalOptions="StartAndExpand">
+                <VerticalStackLayout >
+                    <!--<BindableLayout.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Row 1</x:String>
+                            <x:String>Row 2</x:String>
+                            <x:String>Row 3</x:String>
+                            <x:String>Row 4</x:String>
+                            <x:String>Row 5</x:String>
+                            <x:String>Row 6</x:String>
+                            <x:String>Row 7</x:String>
+                            <x:String>Row 8</x:String>
+                            <x:String>Row 9</x:String>
+                            <x:String>Row 10</x:String>
+                            <x:String>Row 11</x:String>
+                            <x:String>Row 12</x:String>
+                            <x:String>Row 13</x:String>
+                            <x:String>Row 14</x:String>
+                            <x:String>Row 15</x:String>
+                            <x:String>Row 16</x:String>
+                            <x:String>Row 17</x:String>
+                            <x:String>Row 18</x:String>
+                            <x:String>Row 19</x:String>
+                            <x:String>Row 20</x:String>
+                        </x:Array>
+                    </BindableLayout.ItemsSource>
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Label
+                                    HeightRequest="35"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding .}"
+                                    VerticalTextAlignment="Center"
+                                    WidthRequest="100" />
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>-->
+                </VerticalStackLayout>
+
+            </HorizontalStackLayout>
+
+        </ScrollView>
+    </Grid>
+
+    <!--Coluna Completa-->
+    <Grid
+        x:Name="DataTableGrid"
+        Grid.Column="1"
+        HorizontalOptions="Start"
+        RowDefinitions="Auto, *">
+
+        <!--  Cabeçalho  -->
+
+        <ScrollView
+            InputTransparent="True"
+            x:Name="CabecalhoCompletoScrollView"
+            HorizontalScrollBarVisibility="Never"
+            IsVisible="True"
+            Orientation="Horizontal"
+            VerticalScrollBarVisibility="Never">
+            <HorizontalStackLayout x:Name="CabecalhoCompletoHorizontalStackLayout">
+                <!--<BindableLayout.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>ID</x:String>
+                        <x:String>Col 1</x:String>
+                        <x:String>Col 2</x:String>
+                        <x:String>Col 3</x:String>
+                        <x:String>Col 4</x:String>
+                    </x:Array>
+                </BindableLayout.ItemsSource>
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Label
+                                FontAttributes="Bold"
+                                HeightRequest="45"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding .}"
+                                VerticalTextAlignment="Center"
+                                WidthRequest="100" />
+                        </Grid>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>-->
+            </HorizontalStackLayout>
+        </ScrollView>
+
+
+        <!--  Coluna  -->
+        <ScrollView
+            x:Name="ColunaCompletaScrollView"
+            Grid.Row="1"
+            HorizontalOptions="FillAndExpand"
+            HorizontalScrollBarVisibility="Always"
+            Orientation="Both"
+            Scrolled="ColunaCompletaScrollView_Scrolled"
+            VerticalScrollBarVisibility="Always">
+            <HorizontalStackLayout x:Name="ColunaCompletaHorizontalStackLayout">
+                
+
+               <VerticalStackLayout >
+                     <!--<BindableLayout.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Row 1</x:String>
+                            <x:String>Row 2</x:String>
+                            <x:String>Row 3</x:String>
+                            <x:String>Row 4</x:String>
+                            <x:String>Row 5</x:String>
+                            <x:String>Row 6</x:String>
+                            <x:String>Row 7</x:String>
+                            <x:String>Row 8</x:String>
+                            <x:String>Row 9</x:String>
+                            <x:String>Row 10</x:String>
+                            <x:String>Row 11</x:String>
+                            <x:String>Row 12</x:String>
+                            <x:String>Row 13</x:String>
+                            <x:String>Row 14</x:String>
+                            <x:String>Row 15</x:String>
+                            <x:String>Row 16</x:String>
+                            <x:String>Row 17</x:String>
+                            <x:String>Row 18</x:String>
+                            <x:String>Row 19</x:String>
+                            <x:String>Row 20</x:String>
+
+                        </x:Array>
+                    </BindableLayout.ItemsSource>
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Label
+                                    HeightRequest="35"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding .}"
+                                    VerticalTextAlignment="Center"
+                                    WidthRequest="100" />
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout BackgroundColor="Blue">
+                    <BindableLayout.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Row 1</x:String>
+                            <x:String>Row 2</x:String>
+                            <x:String>Row 3</x:String>
+                            <x:String>Row 4</x:String>
+                            <x:String>Row 5</x:String>
+                            <x:String>Row 6</x:String>
+                            <x:String>Row 7</x:String>
+                            <x:String>Row 8</x:String>
+                            <x:String>Row 9</x:String>
+                            <x:String>Row 10</x:String>
+                            <x:String>Row 11</x:String>
+                            <x:String>Row 12</x:String>
+                            <x:String>Row 13</x:String>
+                            <x:String>Row 14</x:String>
+                            <x:String>Row 15</x:String>
+                            <x:String>Row 16</x:String>
+                            <x:String>Row 17</x:String>
+                            <x:String>Row 18</x:String>
+                            <x:String>Row 19</x:String>
+                            <x:String>Row 20</x:String>
+
+                        </x:Array>
+                    </BindableLayout.ItemsSource>
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Label
+                                    HeightRequest="35"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding .}"
+                                    VerticalTextAlignment="Center"
+                                    WidthRequest="100" />
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout BackgroundColor="Green">
+                    <BindableLayout.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Row 1</x:String>
+                            <x:String>Row 2</x:String>
+                            <x:String>Row 3</x:String>
+                            <x:String>Row 4</x:String>
+                            <x:String>Row 5</x:String>
+                            <x:String>Row 6</x:String>
+                            <x:String>Row 7</x:String>
+                            <x:String>Row 8</x:String>
+                            <x:String>Row 9</x:String>
+                            <x:String>Row 10</x:String>
+                            <x:String>Row 11</x:String>
+                            <x:String>Row 12</x:String>
+                            <x:String>Row 13</x:String>
+                            <x:String>Row 14</x:String>
+                            <x:String>Row 15</x:String>
+                            <x:String>Row 16</x:String>
+                            <x:String>Row 17</x:String>
+                            <x:String>Row 18</x:String>
+                            <x:String>Row 19</x:String>
+                            <x:String>Row 20</x:String>
+
+                        </x:Array>
+                    </BindableLayout.ItemsSource>
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Label
+                                    HeightRequest="35"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding .}"
+                                    VerticalTextAlignment="Center"
+                                    WidthRequest="100" />
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout BackgroundColor="Purple">
+                    <BindableLayout.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Row 1</x:String>
+                            <x:String>Row 2</x:String>
+                            <x:String>Row 3</x:String>
+                            <x:String>Row 4</x:String>
+                            <x:String>Row 5</x:String>
+                            <x:String>Row 6</x:String>
+                            <x:String>Row 7</x:String>
+                            <x:String>Row 8</x:String>
+                            <x:String>Row 9</x:String>
+                            <x:String>Row 10</x:String>
+                            <x:String>Row 11</x:String>
+                            <x:String>Row 12</x:String>
+                            <x:String>Row 13</x:String>
+                            <x:String>Row 14</x:String>
+                            <x:String>Row 15</x:String>
+                            <x:String>Row 16</x:String>
+                            <x:String>Row 17</x:String>
+                            <x:String>Row 18</x:String>
+                            <x:String>Row 19</x:String>
+                            <x:String>Row 20</x:String>
+
+                        </x:Array>
+                    </BindableLayout.ItemsSource>
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Label
+                                    HeightRequest="35"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding .}"
+                                    VerticalTextAlignment="Center"
+                                    WidthRequest="100" />
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout BackgroundColor="Olive">
+                    <BindableLayout.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Row 1</x:String>
+                            <x:String>Row 2</x:String>
+                            <x:String>Row 3</x:String>
+                            <x:String>Row 4</x:String>
+                            <x:String>Row 5</x:String>
+                            <x:String>Row 6</x:String>
+                            <x:String>Row 7</x:String>
+                            <x:String>Row 8</x:String>
+                            <x:String>Row 9</x:String>
+                            <x:String>Row 10</x:String>
+                            <x:String>Row 11</x:String>
+                            <x:String>Row 12</x:String>
+                            <x:String>Row 13</x:String>
+                            <x:String>Row 14</x:String>
+                            <x:String>Row 15</x:String>
+                            <x:String>Row 16</x:String>
+                            <x:String>Row 17</x:String>
+                            <x:String>Row 18</x:String>
+                            <x:String>Row 19</x:String>
+                            <x:String>Row 20</x:String>
+
+                        </x:Array>
+                    </BindableLayout.ItemsSource>
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Label
+                                    HeightRequest="35"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding .}"
+                                    VerticalTextAlignment="Center"
+                                    WidthRequest="100" />
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>-->
+                </VerticalStackLayout>
+
+            </HorizontalStackLayout>
+
+        </ScrollView>
+    </Grid>
+
+    <!--Linhas Horizontal-->
+    <Grid
+        Grid.ColumnSpan="2"
+        HorizontalOptions="Center"
+        InputTransparent="True"
+        ZIndex="-1"
+        IsVisible="True">
+        <ScrollView
+            x:Name="LinhasHorizontalScrollView"
+            HorizontalOptions="Center"
+            HorizontalScrollBarVisibility="Never"
+            IsVisible="True"
+            VerticalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Never">
+            <VerticalStackLayout x:Name="LinhasHorizontalVerticalStackLayout" HorizontalOptions="Center">
+                <!--<BindableLayout.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Row 1</x:String>
+                        <x:String>Row 2</x:String>
+                        <x:String>Row 3</x:String>
+                        <x:String>Row 4</x:String>
+                        <x:String>Row 5</x:String>
+                        <x:String>Row 6</x:String>
+                        <x:String>Row 7</x:String>
+                        <x:String>Row 8</x:String>
+                        <x:String>Row 9</x:String>
+                        <x:String>Row 10</x:String>
+                        <x:String>Row 11</x:String>
+                        <x:String>Row 12</x:String>
+                        <x:String>Row 13</x:String>
+                        <x:String>Row 14</x:String>
+                        <x:String>Row 15</x:String>
+                        <x:String>Row 16</x:String>
+                        <x:String>Row 17</x:String>
+                        <x:String>Row 18</x:String>
+                        <x:String>Row 19</x:String>
+                        <x:String>Row 20</x:String>
+                        <x:String>Row 1</x:String>
+                        <x:String>Row 2</x:String>
+                        <x:String>Row 3</x:String>
+                        <x:String>Row 4</x:String>
+                        <x:String>Row 5</x:String>
+                        <x:String>Row 6</x:String>
+                        <x:String>Row 7</x:String>
+                        <x:String>Row 8</x:String>
+                        <x:String>Row 9</x:String>
+                        <x:String>Row 10</x:String>
+                        <x:String>Row 11</x:String>
+                        <x:String>Row 12</x:String>
+                        <x:String>Row 13</x:String>
+                        <x:String>Row 14</x:String>
+                        <x:String>Row 15</x:String>
+                        <x:String>Row 16</x:String>
+                        <x:String>Row 17</x:String>
+                        <x:String>Row 18</x:String>
+                        <x:String>Row 19</x:String>
+                        <x:String>Row 20</x:String>
+                        <x:String>Row 10</x:String>
+                        <x:String>Row 11</x:String>
+                        <x:String>Row 12</x:String>
+                        <x:String>Row 13</x:String>
+                        <x:String>Row 14</x:String>
+                        <x:String>Row 15</x:String>
+                        <x:String>Row 16</x:String>
+                        <x:String>Row 17</x:String>
+                        <x:String>Row 18</x:String>
+                        <x:String>Row 19</x:String>
+                        <x:String>Row 20</x:String>
+
+                    </x:Array>
+                </BindableLayout.ItemsSource>
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Label
+                                HeightRequest="35"
+                                HorizontalTextAlignment="Center"
+                                Text=""
+                                VerticalTextAlignment="Center"
+                                WidthRequest="100" />
+
+                            <BoxView
+                                HorizontalOptions="StartAndExpand"
+                                WidthRequest="1100"
+                                HeightRequest="1"
+                                VerticalOptions="End"
+                                Color="Gray" />
+                        </Grid>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>-->
+            </VerticalStackLayout>
+
+        </ScrollView>
+    </Grid>
+
+
+</Grid>
+

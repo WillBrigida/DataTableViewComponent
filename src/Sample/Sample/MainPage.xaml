@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Sample.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dtv="clr-namespace:Sample.Components"
+    Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <dtv:DataTableView
+            x:Name="dtv"
+            ColumnWidthRequest="120"
+            HeaderBackgroundColor="Purple"
+            HeaderTextColor="White"
+            HorizontalOptions="Start"
+            ItemsSource="{Binding Items}"
+            PinFirstColumn="True"
+            RowHeightRequest="30"
+            SeparatorType="EvenRow">
+            <!--  Table View Component  -->
+            <dtv:DataTableView.HeaderTitles>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>ID</x:String>
+                    <x:String>Col 1</x:String>
+                    <x:String>Col 2</x:String>
+                    <x:String>Col 3</x:String>
+                    <x:String>Col 4</x:String>
+                    <x:String>Col 5</x:String>
+                    <x:String>Col 6</x:String>
+                    <x:String>Col 7</x:String>
+                    <x:String>Col 8</x:String>
+                    <x:String>Col 9</x:String>
+                </x:Array>
+
+            </dtv:DataTableView.HeaderTitles>
+            <!--  Properties  -->
+            <dtv:DataTableView.PropertiesName>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Id</x:String>
+                    <x:String>Column1</x:String>
+                    <x:String>Column2</x:String>
+                    <x:String>Column3</x:String>
+                    <x:String>Column4</x:String>
+                    <x:String>Column5</x:String>
+                    <x:String>Column6</x:String>
+                    <x:String>Column7</x:String>
+                    <x:String>Column8</x:String>
+                    <x:String>Column9</x:String>
+                </x:Array>
+            </dtv:DataTableView.PropertiesName>
+        </dtv:DataTableView>
+
+    </Grid>
+
+</ContentPage>
+
