@@ -7,7 +7,6 @@ public partial class DataTableView : Grid
 {
     bool scroled = false;
     public enum SeparatorTypeEnum { Default, HorizontalLine, EvenRow };
-
     public static Color _HeaderTextColor { get; set; } = Color.FromArgb("#444444");
     public static Color _HeaderBackgroundColor { get; set; } = Color.FromArgb("#50CCCCCC");
     public static double _ColumnWidthRequest { get; set; } = 100.0;
@@ -16,8 +15,39 @@ public partial class DataTableView : Grid
     public static bool _PinFirstColumn { get; set; } = false;
     public static SeparatorTypeEnum _SeparatorType { get; set; } = 0;
 
+    public DataTableView()
+    {
+        InitializeComponent();
 
-    public DataTableView() => InitializeComponent();
+        //Medida de contorno para resolver o bug da orientação do scroll no Android - Propriedade Both Não funciona
+        if (DeviceInfo.Platform == DevicePlatform.Android)
+        {
+            var scroll = new ScrollView
+            {
+                HorizontalOptions = LayoutOptions.Fill,
+                Padding = 0,
+                Orientation = ScrollOrientation.Both,
+                VerticalScrollBarVisibility = ScrollBarVisibility.Always
+            };
+
+            scroll.Scrolled += ColunaCompletaHorizontalScrollView_Scrolled;
+            scroll.Content = new HorizontalStackLayout();
+
+            var scrollFixo = new ScrollView
+            {
+                HorizontalOptions = LayoutOptions.Fill,
+                Padding = 0,
+                Orientation = ScrollOrientation.Vertical,
+                VerticalScrollBarVisibility = ScrollBarVisibility.Always
+            };
+
+            scrollFixo.Scrolled += ColunaCompletaScrollView_Scrolled;
+            scrollFixo.Content = scroll;
+
+            DataTableGrid.Children.Remove(ColunaCompletaScrollView);
+            DataTableGrid.Add(scrollFixo, 0, 1);
+        }
+    }
 
     private async void ColunaFixaScrollView_Scrolled(object sender, ScrolledEventArgs e)
     {
@@ -27,7 +57,7 @@ public partial class DataTableView : Grid
 
             await Task.WhenAll(
                 ColunaCompletaScrollView.ScrollToAsync(ColunaCompletaScrollView.ScrollX, e.ScrollY, false),
-                LinhasHorizontalScrollView.ScrollToAsync(0, e.ScrollY, false));
+                CabecalhoCompletoScrollView.ScrollToAsync(e.ScrollX, 0, false));
         }
         scroled = false;
     }
@@ -37,10 +67,35 @@ public partial class DataTableView : Grid
         if (!scroled)
         {
             scroled = true;
-            await Task.WhenAll(
-             ColunaFixaScrollView.ScrollToAsync(0, e.ScrollY, false),
-             CabecalhoCompletoScrollView.ScrollToAsync(e.ScrollX, 0, false),
-             LinhasHorizontalScrollView.ScrollToAsync(0, e.ScrollY, false));
+
+            //Medida de contorno para resolver o bug da orientação do scroll no Android - Propriedade Both Não funciona
+            if (DeviceInfo.Platform != DevicePlatform.Android)
+                await Task.WhenAll
+                (
+                    ColunaFixaScrollView.ScrollToAsync(0, e.ScrollY, false),
+                    CabecalhoCompletoScrollView.ScrollToAsync(e.ScrollX, 0, false),
+                    LinhasHorizontalScrollView.ScrollToAsync(0, e.ScrollY, false)
+                );
+
+            else
+                await Task.WhenAll
+                (
+                    ColunaFixaScrollView.ScrollToAsync(0, e.ScrollY, false),
+                    LinhasHorizontalScrollView.ScrollToAsync(0, e.ScrollY, false)
+                );
+        }
+        scroled = false;
+    }
+
+    private async void ColunaCompletaHorizontalScrollView_Scrolled(object sender, ScrolledEventArgs e)
+    {
+        //Android Only
+        //Medida de contorno para resolver o bug da orientação do scroll no Android - Propriedade Both Não funciona
+
+        if (!scroled)
+        {
+            scroled = true;
+            await CabecalhoCompletoScrollView.ScrollToAsync(e.ScrollX, 0, false);
         }
         scroled = false;
     }
@@ -65,7 +120,6 @@ public partial class DataTableView : Grid
         get => (SeparatorTypeEnum)GetValue(SeparatorTypeProperty);
         set => SetValue(SeparatorTypeProperty, value);
     }
-
 
     #endregion
 
@@ -299,13 +353,22 @@ public partial class DataTableView : Grid
             BindableLayout.SetItemsSource(vsl, itemsSource);
             BindableLayout.SetItemTemplate(vsl, colunaCompletaTemplate);
             if (_PinFirstColumn && index == 0) vsl.IsVisible = false;
-            control.ColunaCompletaHorizontalStackLayout.Add(vsl);
+
+            //Medida de contorno para resolver o bug da orientação do scroll no Android - Propriedade Both Não funciona
+            if (DeviceInfo.Platform != DevicePlatform.Android)
+                control.ColunaCompletaHorizontalStackLayout.Add(vsl);
+
+            else
+                (((control.DataTableGrid
+                    .Children[1] as ScrollView)
+                    .Children[0] as ScrollView)
+                    .Children[0] as HorizontalStackLayout)
+                    .Add(vsl);
 
             index++;
         }
 
         //Linhas Horizontal
-
         if (_SeparatorType != SeparatorTypeEnum.Default)
         {
             VerticalStackLayout vs2 = new();
@@ -315,7 +378,6 @@ public partial class DataTableView : Grid
             (control.LinhasHorizontalVerticalStackLayout.Parent.Parent as Grid).Margin = new Thickness(0, HeaderWidh, 0, 0);
             control.LinhasHorizontalVerticalStackLayout.Add(vs2);
         }
-
     }
 
     private static Grid CreateCollection(string propertiesName = null, int index = 0, bool isHeader = false)
@@ -385,7 +447,6 @@ public partial class DataTableView : Grid
             dataTrigger.Setters.Add(dataSetter);
             line.Triggers.Add(dataTrigger);
         }
-
 
         collectionTemplate.Add(description);
         collectionTemplate.Add(line);
