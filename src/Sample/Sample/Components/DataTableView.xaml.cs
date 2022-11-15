@@ -55,9 +55,19 @@ public partial class DataTableView : Grid
         {
             scroled = true;
 
-            await Task.WhenAll(
-                ColunaCompletaScrollView.ScrollToAsync(ColunaCompletaScrollView.ScrollX, e.ScrollY, false),
-                CabecalhoCompletoScrollView.ScrollToAsync(e.ScrollX, 0, false));
+            //Medida de contorno para resolver o bug da orientação do scroll no Android - Propriedade Both Não funciona
+
+            if (DeviceInfo.Platform != DevicePlatform.Android)
+                await Task.WhenAll(
+                ColunaCompletaScrollView.ScrollToAsync(0, e.ScrollY, false),
+                LinhasHorizontalScrollView.ScrollToAsync(0, e.ScrollY, false));
+
+            else
+            {
+                await Task.WhenAll(
+                    (DataTableGrid.Children[1] as ScrollView).ScrollToAsync(0, e.ScrollY, false),
+                    LinhasHorizontalScrollView.ScrollToAsync(0, e.ScrollY, false));
+            }
         }
         scroled = false;
     }
