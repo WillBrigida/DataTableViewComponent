@@ -1,8 +1,5 @@
 ﻿using System.Collections;
-
 namespace Sample.Components;
-
-
 public partial class DataTableView : Grid
 {
     bool scroled = false;
@@ -452,7 +449,7 @@ public partial class DataTableView : Grid
 
             Setter dataSetter = new Setter();
             dataSetter.Property = BoxView.ColorProperty;
-            dataSetter.Value = Colors.Transparent;
+            dataSetter.Value = Color.FromArgb("#15CCCCCC");
 
             dataTrigger.Setters.Add(dataSetter);
             line.Triggers.Add(dataTrigger);
