@@ -12,7 +12,7 @@
             ColumnWidthRequest="120"
             HeaderBackgroundColor="Purple"
             HeaderTextColor="White"
-            HorizontalOptions="Start"
+            HorizontalOptions="Center"
             ItemsSource="{Binding Items}"
             PinFirstColumn="True"
             RowHeightRequest="30"
@@ -50,6 +50,25 @@
             </dtv:DataTableView.PropertiesName>
         </dtv:DataTableView>
 
+        <Grid
+            ColumnDefinitions="*,*"
+            ColumnSpacing="5"
+            HorizontalOptions="Center"
+            VerticalOptions="End">
+
+            <Button
+                BackgroundColor="Transparent"
+                Command="{Binding IncluirCommand}"
+                Text="Incluir"
+                TextColor="Blue" />
+
+            <Button
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                Command="{Binding ExcluirCommand}"
+                Text="Excluir"
+                TextColor="Red" />
+        </Grid>
     </Grid>
 
 </ContentPage>

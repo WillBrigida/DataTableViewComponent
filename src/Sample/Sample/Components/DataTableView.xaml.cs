@@ -382,7 +382,7 @@ public partial class DataTableView : Grid
             DataTemplate linhaemplate = new(() => CreateLines(propertiesName));
             BindableLayout.SetItemsSource(vs2, itemsSource);
             BindableLayout.SetItemTemplate(vs2, linhaemplate);
-            (control.LinhasHorizontalVerticalStackLayout.Parent.Parent as Grid).Margin = new Thickness(0, HeaderWidh, 0, 0);
+            control.LinhasHorizontalVerticalStackLayout.Margin = new Thickness(0, HeaderWidh, 0, 0);
             control.LinhasHorizontalVerticalStackLayout.Add(vs2);
         }
     }
@@ -449,7 +449,7 @@ public partial class DataTableView : Grid
 
             Setter dataSetter = new Setter();
             dataSetter.Property = BoxView.ColorProperty;
-            dataSetter.Value = Color.FromArgb("#15CCCCCC");
+            dataSetter.Value = Colors.Transparent;//.FromArgb("#15CCCCCC");
 
             dataTrigger.Setters.Add(dataSetter);
             line.Triggers.Add(dataTrigger);

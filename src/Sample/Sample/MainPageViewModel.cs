@@ -1,6 +1,7 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace Sample;
 
 public partial class MainPageViewModel : ObservableObject
@@ -9,8 +10,27 @@ public partial class MainPageViewModel : ObservableObject
 
     public MainPageViewModel()
     {
-        
+
     }
+
+    [RelayCommand]
+    void Incluir() => Items.Add(new Models.DataTable(Items.Count - 1)
+    {
+        Id = Items.Count + 1,
+        Column1 = $"Col 1 | Row {Items.Count + 1}",
+        Column2 = $"Col 2 | Row {Items.Count + 1}",
+        Column3 = $"Col 3 | Row {Items.Count + 1}",
+        Column4 = $"Col 4 | Row {Items.Count + 1}",
+        Column5 = $"Col 5 | Row {Items.Count + 1}",
+        Column6 = $"Col 6 | Row {Items.Count + 1}",
+        Column7 = $"Col 7 | Row {Items.Count + 1}",
+        Column8 = $"Col 8 | Row {Items.Count + 1}",
+        Column9 = $"Col 9 | Row {Items.Count + 1}",
+    });
+
+
+    [RelayCommand]
+    void Excluir() => Items.RemoveAt(Items.Count - 1);
 
     private static async IAsyncEnumerable<Models.DataTable> GetData(bool fullLoad = false)
     {
@@ -57,7 +77,7 @@ public partial class MainPageViewModel : ObservableObject
                 Column7 = $"Col 7 | Row {i}",
                 Column8 = $"Col 8 | Row {i}",
                 Column9 = $"Col 9 | Row {i}",
-            }) ;
+            });
         }
     }
 }

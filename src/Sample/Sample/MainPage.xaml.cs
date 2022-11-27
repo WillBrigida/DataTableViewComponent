@@ -2,9 +2,9 @@
 
 public partial class MainPage : ContentPage
 {
-	public MainPage()
-	{
-		InitializeComponent();
+    public MainPage()
+    {
+        InitializeComponent();
         this.BindingContext = MauiProgram.ServiceProvider.GetRequiredService<MainPageViewModel>();
     }
 
