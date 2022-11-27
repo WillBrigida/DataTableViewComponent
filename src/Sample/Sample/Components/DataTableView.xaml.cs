@@ -24,7 +24,8 @@ public partial class DataTableView : Grid
                 HorizontalOptions = LayoutOptions.Fill,
                 Padding = 0,
                 Orientation = ScrollOrientation.Both,
-                VerticalScrollBarVisibility = ScrollBarVisibility.Always
+                VerticalScrollBarVisibility = ScrollBarVisibility.Always,
+                VerticalOptions = LayoutOptions.Start
             };
 
             scroll.Scrolled += ColunaCompletaHorizontalScrollView_Scrolled;
@@ -35,7 +36,8 @@ public partial class DataTableView : Grid
                 HorizontalOptions = LayoutOptions.Fill,
                 Padding = 0,
                 Orientation = ScrollOrientation.Vertical,
-                VerticalScrollBarVisibility = ScrollBarVisibility.Always
+                VerticalScrollBarVisibility = ScrollBarVisibility.Always,
+                VerticalOptions = LayoutOptions.Start
             };
 
             scrollFixo.Scrolled += ColunaCompletaScrollView_Scrolled;
